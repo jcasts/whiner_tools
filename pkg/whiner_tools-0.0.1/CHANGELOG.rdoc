@@ -1,3 +1,0 @@
-=== 0.0.1 / 2009-08-03
-
-* First release, includes deprecation, todo, and logger
