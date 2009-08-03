@@ -1,0 +1,7 @@
+CHANGELOG.rdoc
+README.rdoc
+Manifest.txt
+Rakefile
+lib/whiner_tools.rb
+lib/whiner_tools/logger.rb
+lib/whiner_tools/global.rb
