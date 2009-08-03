@@ -33,10 +33,10 @@ Set up a default logger accessible from the 'logger' method:
 
 Using the logger:
 
-	logger.add_target File.open("log_file.txt")
+    logger.add_target File.open("log_file.txt")
     logger.warn "This is a warning!"
       # $stdout #
-	  #=> WARN [03/Aug/2009] ((irb):46:in `irb_binding'): This is a warning!
-	  
-	  # log_file.txt #
-	  #=> WARN [03/Aug/2009:10:15:10 -0700] ((irb):46:in `irb_binding'): This is a warning!
+      #=> WARN [03/Aug/2009] ((irb):46:in `irb_binding'): This is a warning!
+      
+      # log_file.txt #
+      #=> WARN [03/Aug/2009:10:15:10 -0700] ((irb):46:in `irb_binding'): This is a warning!
