@@ -5,3 +5,5 @@ Rakefile
 lib/whiner_tools.rb
 lib/whiner_tools/logger.rb
 lib/whiner_tools/global.rb
+lib/whiner_tools/shell_output.rb
+lib/whiner_tools/config.rb

@@ -6,7 +6,18 @@
 
 Collection of helper methods that display information that could typically be in comments, to the command line: specifically 'todo' and 'deprecated'. Whiner Tools also comes with a powerful logger that can output to any IO type object or proc.
 
+Whiner Tools also supports grouping of whiner outputs by type, color, and hooks for different objects to output to.
+
 == Examples
+
+Use whine to generate an arbitrary message.
+	
+	whine :about => "Vaccums", :say => "They suck too much!"
+	whine :about => "Vaccums", :say => "Boooo", :backtrace => :all
+	whine :about => "Vaccums", :say => "Boooo", :backtrace => 2
+
+The backtrace option can take any positive integer as a value and the flags :all and :none. Backtracing is set to :none by default, unless Whiner Tools is configured to give a backtrace.
+
 
 Use deprecated to flag a method as deprecated and raise a warning.
 
