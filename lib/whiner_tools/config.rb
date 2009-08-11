@@ -2,7 +2,7 @@ module WhinerTools
   
   class Config
     
-    DEFAULT_COLORS = {:todos => :cyan, :deprecation => :yellow}
+    COLOR_SETUP = {:todos => :cyan, :deprecation => :yellow}
     ATTRIBUTES = [:inline_warnings, :compact_warnings, :full_backtrace, :color, :output]
     
     ATTRIBUTES.each do |attrib|
@@ -21,8 +21,8 @@ module WhinerTools
         :inline_warnings => false,
         :compact_warnings => true,
         :full_backtrace => false,
-        :color => DEFAULT_COLORS,
-        :output => ShellOutput.new(DEFAULT_COLORS)
+        :color => COLOR_SETUP,
+        :output => ShellOutput.new(COLOR_SETUP) # Referencing the same object as :color makes the output color swappable on the fly
       }
     end
     

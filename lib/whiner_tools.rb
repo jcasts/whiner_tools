@@ -35,7 +35,6 @@ module WhinerTools
   def self.start(&block)
     @@config = Config.new
     @@config.instance_eval(&block) if block_given?
-    @@output = @@config.output
   end
   
 end
@@ -45,7 +44,7 @@ end
 end
 
 WhinerTools.start do
-  color[:vacuums] = :red
+  self.color[:vacuums] = :red
 end
 
 TODO "first todo test"
