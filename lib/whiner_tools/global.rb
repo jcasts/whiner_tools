@@ -1,4 +1,16 @@
-# Use deprecated to flag a method as deprecated and raise a warning.
+# Use 'whine' to make information about a specific category visible.
+# whine outputs are grouped by default but can output inline if the :inline 
+# option is set:
+#  whine :about => "Politics", :say => "they suck!", :backtrace => 2
+#  whine :about => "Craziness", :say => "I love crazy things!", :backtrace => :all
+#  whine :about => "Stuff", :say => "I'm such a whiner", :backtrace => :none, :inline => true
+def whine(options={})
+  message_hash = {options[:about] => options[:say]}
+  WhinerTools.print(message_hash, options[:inline])
+end
+
+
+# Use 'deprecated' to flag a method as deprecated and raise a warning.
 #  deprecated :use => "new_method"
 #    #=> "Deprecation Warning: '#{caller[0]}' is deprecated. Use 'new_method'."
 #  deprecated :was => "old_method", :use => "new_method"
@@ -12,9 +24,9 @@ def deprecated(options={})
   new_implementation = options[:use] ? " Use '#{options[:use]}'." : ""
   
   message = options[:message] || "'#{old_method}' is deprecated.#{new_implementation}"
-  message = "#{message}\n   from: #{caller[1]}"
+  message = "#{message}\n   from: #{(caller[1] || caller.last)}"
   
-  puts "Deprecation Warning: #{message}"
+  whine :about => "Deprecation", :say => message
 end
 
 
@@ -23,7 +35,7 @@ end
 #   #=> "TODO [#{caller[0]}]: This is stuff to do. DON'T FORGET!!!"
 # Avoid calling TODO from methods as it will output TODOs repetedly.
 def TODO(msg="(no-info)")
-  puts "TODO [#{caller[0]}]: #{msg}"
+  whine :about => "TODOs", :say => "[#{caller[0]}]: #{msg}"
 end
 
 

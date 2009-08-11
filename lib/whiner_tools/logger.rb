@@ -25,7 +25,7 @@ module WhinerTools
     attr_reader :targets
     
     def initialize(out=nil, options={}, &block)
-      @default_options = {:format => "$L [$T] ($B): $M", :time_format => "%d/%b/%Y:%H:%M:%S %z", :level => 0}
+      @default_options = {:format => "$L [$T] ($B): $M", :time_format => "%d/%b/%Y:%H:%M:%S %z", :level => 0}.merge(options)
       @targets = []
       add_target(out, options) unless !out && block_given?
       yield(self) if block_given?
