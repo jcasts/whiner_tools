@@ -30,10 +30,10 @@ module WhinerTools
     end
     
     def render(options={})
-      header = format_string(options[:header], options[:format], :header)
+      header = format_string(" == #{options[:header]} == ", options[:format], :header)
       body   = format_string(options[:body],   options[:format], :body)
       
-      IO_OUT.print `echo "\n#{[header, body].compact.join('\n')}\n"`
+      IO_OUT.print `echo "\n#{[header, body].compact.join('\n')}\\c"`, "\n"
       IO_OUT.flush
     end
     
@@ -43,11 +43,10 @@ module WhinerTools
     
 
     def format_string(string, format, content_type)
-      # TODO: pad string with blank space for prettiness if it is a header
       return nil unless string
       format_color(format, content_type) + string + get_color(:default)
     end
-
+    
     def format_color(format_name, content_type)
       return "" unless @colors
       return get_color(@colors[format_name], content_type == :header)
@@ -62,12 +61,12 @@ module WhinerTools
         fcolor = COLORS[color_name][0]
         bcolor = ""
       end
-      return ansi_escape('\e['+fcolor+bcolor+'m')
+      return ansi_escape('\\033['+fcolor+bcolor+'m')
     end
     
     def ansi_escape(string)
       return string
-      '\['+string+'\]'
+      #'\['+string+'\]'
     end
     
   end
