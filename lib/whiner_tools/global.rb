@@ -1,10 +1,12 @@
 # Use 'whine' to make information about a specific category visible.
 # whine outputs are grouped by default but can output inline if the :inline 
 # option is set:
+#  whine :about => "Stuff", :say => "I'm such a whiner", :inline => true
+# A :backtrace option can also be set:
 #  whine :about => "Politics", :say => "they suck!", :backtrace => 2
 #  whine :about => "Craziness", :say => "I love crazy things!", :backtrace => :all
-#  whine :about => "Stuff", :say => "I'm such a whiner", :backtrace => :none, :inline => true
 def whine(options={})
+  # TODO: add backtrace option
   message_hash = {options[:about] => options[:say]}
   WhinerTools.print(message_hash, options[:inline])
 end
