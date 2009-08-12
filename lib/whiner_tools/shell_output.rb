@@ -30,10 +30,11 @@ module WhinerTools
     end
     
     def render(options={})
-      header = format_string(" == #{options[:header]} == ", options[:format], :header)
-      body   = format_string(options[:body],   options[:format], :body)
+      header  = format_string(" == #{options[:header]} == ", options[:format], :header) if options[:header]
+      oneline = format_string(" #{options[:oneline]} ", options[:format], :oneline) if options[:oneline]
+      body    = format_string(options[:body],   options[:format], :body) if options[:body]
       
-      IO_OUT.print `echo "\n#{[header, body].compact.join('\n')}\\c"`, "\n"
+      IO_OUT.print `echo "\n#{[header, oneline, body].compact.join('\n')}\\c"`, "\n"
       IO_OUT.flush
     end
     
@@ -49,7 +50,7 @@ module WhinerTools
     
     def format_color(format_name, content_type)
       return "" unless @colors
-      return get_color(@colors[format_name], content_type == :header)
+      return get_color(@colors[format_name], content_type != :body)
     end
     
     def get_color(color_name, bg=false)

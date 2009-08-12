@@ -13,7 +13,7 @@ module WhinerTools
     
     print_hash.each do |title, value|
       if flush || @@config.inline_warnings
-        @@config.output.render :header => "#{title}: #{value}", :format => title.downcase.to_sym
+        @@config.output.render :oneline => "#{title}: #{value}", :format => title.downcase.to_sym
       else
         @@print_cache[title] << value
       end
