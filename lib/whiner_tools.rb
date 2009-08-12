@@ -39,13 +39,16 @@ module WhinerTools
   
 end
 
+require 'yaml'
+
 %w[shell_output config logger global].each do |filename|
   require "#{File.dirname(__FILE__)}/whiner_tools/#{filename}"
 end
 
-WhinerTools.start do
-  self.color[:vacuums] = :red
-end
+# WhinerTools.start do
+#   self.color[:vacuums] = :red
+# end
+WhinerTools.start
 
 TODO "first todo test"
 TODO "second todo test"

@@ -2,7 +2,18 @@ module WhinerTools
   
   class Config
     
+    CONFIG_FILEPATH = "#{Dir.getwd}/whiner.opts"
+    
     COLOR_SETUP = {:todos => :cyan, :deprecation => :yellow}
+    
+    DEFAULT_OPTIONS = {
+      :inline_warnings => false,
+      :compact_warnings => true,
+      :full_backtrace => false,
+      :color => COLOR_SETUP.dup,
+      :output => nil
+    }
+    
     ATTRIBUTES = [:inline_warnings, :compact_warnings, :full_backtrace, :color, :output]
     
     ATTRIBUTES.each do |attrib|
@@ -17,13 +28,16 @@ module WhinerTools
     end
     
     def initialize
-      @options = {
-        :inline_warnings => false,
-        :compact_warnings => true,
-        :full_backtrace => false,
-        :color => COLOR_SETUP,
-        :output => ShellOutput.new(COLOR_SETUP) # Referencing the same object as :color makes the output color swappable on the fly
-      }
+      @options = DEFAULT_OPTIONS.dup
+      file_config = load_file(CONFIG_FILEPATH)
+      self.color.merge!(file_config.delete(:color) || {})
+      self.output = ShellOutput.new(self.color)
+      @options.merge(file_config)
+    end
+    
+    def load_file(filepath)
+      parsed_yaml = ( YAML.load_file(filepath) if File.file?(filepath) )
+      parsed_yaml.is_a?(Hash) ? parsed_yaml : {}
     end
     
   end
