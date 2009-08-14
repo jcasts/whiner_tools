@@ -5,10 +5,10 @@
 # A :backtrace option can also be set:
 #  whine :about => "Politics", :say => "they suck!", :backtrace => 2
 #  whine :about => "Craziness", :say => "I love crazy things!", :backtrace => :all
+# The :backtrace option supports booleans, integers, and ranges.
 def whine(options={})
-  # TODO: add backtrace option
-  message_hash = {options[:about] => options[:say]}
-  WhinerTools.print(message_hash, options[:inline])
+  message_hash = {options.delete(:about) => options.delete(:say)}
+  WhinerTools.print(message_hash, options)
 end
 
 
@@ -36,8 +36,9 @@ end
 #  TODO %{This is stuff to do. DON'T FORGET!!!}
 #   #=> "TODO [#{caller[0]}]: This is stuff to do. DON'T FORGET!!!"
 # Avoid calling TODO from methods as it will output TODOs repetedly.
-def TODO(msg="(no-info)")
-  whine :about => "TODOs", :say => "[#{caller[0]}]: #{msg}"
+# Options are the standard whiner options: :inline and :backtrace
+def TODO(msg="(no-info)", options={})
+  whine( {:about => "TODOs", :say => "[#{caller[0]}]: #{msg}"}.merge(options) )
 end
 
 

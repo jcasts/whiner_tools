@@ -10,6 +10,26 @@ Whiner Tools also supports grouping of whiner outputs by type, color, and hooks 
 
 == Examples
 
+Basic usage:
+  
+  # The following options setup is optional:
+  WhinerTools.setup do
+    self.color[:vacuums] = :red
+  end
+  
+  TODO "first todo test"
+  TODO "second todo test"
+  deprecated :use => "new_method"
+  deprecated :message => "muahahaha"
+  
+  whine :about => "Deprecation", :say => "this is a test"
+  whine :about => "TODOs", :say => "this is another test"
+  
+  whine :about => "Vacuums", :say => "they suck!", :inline => true
+  whine :about => "Vacuums", :say => "are they a necessary evil?"
+  
+  WhinerTools.output
+
 Use whine to generate an arbitrary message.
 	
 	whine :about => "Vaccums", :say => "They suck too much!"

@@ -1,5 +1,7 @@
 module WhinerTools
   
+  # Configuration class initialized by first whiner call or by
+  # WhinerTools.setup.
   class Config
     
     CONFIG_FILEPATH = "#{Dir.getwd}/whiner.opts"
@@ -9,7 +11,7 @@ module WhinerTools
     DEFAULT_OPTIONS = {
       :inline_warnings => false,
       :compact_warnings => true,
-      :full_backtrace => false,
+      :backtrace => false,
       :color => COLOR_SETUP.dup,
       :output => nil
     }
@@ -35,6 +37,7 @@ module WhinerTools
       @options.merge(file_config)
     end
     
+    # Load a yaml config file. Yaml parsing should return a Hash.
     def load_file(filepath)
       parsed_yaml = ( YAML.load_file(filepath) if File.file?(filepath) )
       parsed_yaml.is_a?(Hash) ? parsed_yaml : {}
